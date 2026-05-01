@@ -19,10 +19,12 @@ public class Projectile2D : MonoBehaviour
         Vector2 screenPos = Mouse.current.position.ReadValue();
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
+       // if (Input.GetMouseButtonDown(0))
         {
             // ยิง Ray เมื่อคลิกเมาส์ที่ตำแหน่ง screenPos
             Ray ray = Camera.main.ScreenPointToRay(screenPos);
-            Debug.DrawRay(ray.origin, ray.direction * 5f, Color.red, 5f);
+            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawRay(ray.origin,ray.direction * 5f, Color.red, 5f);
 
             // รับค่าที่ Ray ชนกับวัตถุ
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
@@ -32,7 +34,7 @@ public class Projectile2D : MonoBehaviour
             {
                 // ปรับตำแหน่งเป้าหมาย
                 target.transform.position = new Vector2(hit.point.x, hit.point.y);
-                Debug.Log($"Hit {hit.collider.gameObject.name}"); // ปริ้นชื่อวัตถุที่ชน
+                Debug.Log($"Hit {hit.collider.name}"); 
             }
         }
     }
